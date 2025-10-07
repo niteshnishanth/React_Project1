@@ -2,10 +2,11 @@ import {React,useEffect,useState} from 'react'
 import { useNavigate,Router, Routes,Route } from 'react-router-dom'
 import axios from 'axios';
 import Posting from './Posting';
+import io from 'socket.io-client';
+const socket = io('http://localhost:5000');
 function PublicPostings() {
     const [events,setEvents]=useState([])
-    useEffect(()=>{
-        const eventData= async ()=>{
+            const eventData= async ()=>{
             try
             {
                 const response=await axios.post('http://localhost:5000/api/AllEvents')
@@ -22,7 +23,16 @@ function PublicPostings() {
                 console.log(error)
             }
         }
+    useEffect(()=>{
         eventData()
+        socket.on('Post Updated',(updatedPost)=>{
+            console.log(updatedPost)
+            eventData()
+        }
+        )
+        return()=>{
+            socket.off('Post Updated')
+        }
     },[])
     const navigate = useNavigate();
     const handlePostNew = () => {

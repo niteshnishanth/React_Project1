@@ -3,6 +3,15 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const cron=require('node-cron')
 const app = express();
+const http=require('http')
+const server=http.createServer(app)
+const { Server }=require('socket.io')
+const io=new Server(server,{
+  cors:{
+    origin:'*'
+  }
+})
+
 app.use(cors());
 app.use(express.json());
 const port = 5000;
@@ -139,6 +148,7 @@ app.post('/api/AllEvents',async (req,res)=>{
 }
 )
 async function dailyTask(){
+  console.log('Task to Update Database run')
   console.log(new Date().toLocaleDateString())
   console.log('Task to Update Database run', new Date().toLocaleDateString())
   const AllEvents= await Post.find()
@@ -147,12 +157,16 @@ async function dailyTask(){
     const event=AllEvents[i]
     
     
-    if(event.endDate<new Date().toISOString().split('T')[0])
+    if(event.endDate<new Date().toISOString().split('T')[0]&&event.status!='completed')
     {
       console.log(event.title)
-      await Post.findOneAndUpdate({status:'completed'})
-      .then(() => { console.log('Post updated') })
+      const updated=await Post.findOneAndUpdate(event._id,{status:'completed'})
+      .then(() => { 
+        console.log('Post updated') 
+        
+      })
       .catch((e) => { console.log(e) })
+      io.emit('Post Updated',updated)
     }
   }
 }
@@ -165,4 +179,11 @@ cron.schedule('0 0 * * *', async ()=>{
     console.log(e)
   }
 })
-dailyTask()
+
+io.on('connection', (socket) => {
+  console.log('A user connected');
+  socket.on('disconnect', () => {
+    console.log('A user disconnected');
+  });
+}
+)
