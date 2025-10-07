@@ -1,0 +1,198 @@
+ /* index.css or App.css */
+body, html {
+  background-color:#f9f9f9!important;
+}
+.navbar.navbar-expand-lg.navbar-light.bg-light{
+  background-color:#1360ae!important;
+
+  
+}
+
+.navbar {
+  color: white;
+}
+
+/* Navbar.css */
+.custom-navbar {
+  background-color: #559fea !important;
+}
+
+.custom-navbar * {
+  color: white !important;
+}
+
+/* Ensure nav links and dropdown toggles are white */
+.custom-navbar .nav-link,
+.custom-navbar .navbar-brand,
+.custom-navbar .dropdown-toggle {
+  color: white !important;
+}
+
+/* Style dropdown menu background and text */
+.custom-navbar .dropdown-menu {
+  background-color: #3a7fc1 !important;
+  color: white !important;
+  border: none;
+}
+
+/* Style dropdown items */
+.custom-navbar .dropdown-item {
+  color: white !important;
+}
+
+.custom-navbar .dropdown-item:hover {
+  background-color: #2f6ca8 !important;
+  color: #fff !important;
+}
+
+/* Optional: style SignIn button */
+.custom-navbar .btn-outline-success {
+  color: white !important;
+  border-color: white !important;
+}
+
+.custom-navbar .btn-outline-success:hover {
+  background-color: white !important;
+  color: #559fea !important;
+}
+/* Navbar.css */
+.custom-navbar {
+  background-color: #559fea !important;
+}
+
+.custom-navbar * {
+  color: white !important;
+}
+
+/* Ensure nav links and dropdown toggles are white */
+.custom-navbar .nav-link,
+.custom-navbar .navbar-brand,
+.custom-navbar .dropdown-toggle {
+  color: white !important;
+}
+
+/* Style dropdown menu background and text */
+.custom-navbar .dropdown-menu {
+  background-color: #3a7fc1 !important;
+  color: white !important;
+  border: none;
+}
+
+/* Style dropdown items */
+.custom-navbar .dropdown-item {
+  color: white !important;
+}
+
+.custom-navbar .dropdown-item:hover {
+  background-color: #2f6ca8 !important;
+  color: #fff !important;
+}
+
+/* Optional: style SignIn button */
+.custom-navbar .btn-outline-success {
+  color: white !important;
+  border-color: white !important;
+}
+
+.custom-navbar .btn-outline-success:hover {
+  background-color: white !important;
+  color: #559fea !important;
+}
+.custom-navbar .nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.1); /* subtle highlight */
+  color: beige !important;
+}
+
+.custom-navbar .dropdown-item:hover {
+  background-color: #2f6ca8 !important;
+  color: #fff !important;
+}
+.google-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border: 2px solid brick red;
+  background-color: #0d6efd ;
+  color: beige;
+  
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.google-button svg {
+  height: 20px;
+  width: 20px;
+  vertical-align: middle;
+  fill: red;
+}
+.form-select:focus {
+  border-color: #1360ae;
+  box-shadow: 0 0 0 0.2rem rgba(19, 96, 174, 0.25);
+}
+.customcontainer{
+  background-color: white;
+  padding: 20px;
+  
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  margin-left: 0;
+  width: 100%;
+}
+
+.post.img{
+  height: 150px;
+  width: 130px;
+  object-fit: 'contain';
+  border-radius: '4px';
+  border: '1px solid #ccc';
+
+}
+.new-post-form{
+  font-size: small;
+  line-height: 0;
+  font-weight: bold;
+}
+.optWrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 10px;
+  width: 250px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.options li {
+  list-style: none;
+  margin-bottom: 5px;
+}
+
+.options li.disabled {
+  font-weight: bold;
+  color: #666;
+  pointer-events: none;
+}
+
+.MultiControls {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+.post.p{
+  font-size: 0.9rem;
+  line-height: 0.5;
+  word-wrap: break-word;
+
+}
