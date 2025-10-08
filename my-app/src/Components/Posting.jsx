@@ -6,8 +6,9 @@ function Posting({index,event}) {
         <div key={index} className='col-lg-6 col-md-12 col-sm-12 mb-3'>
             <div className="post">
                 <div className='row'>
-                    <div className="col-4">
-                        <img src={event.image} className="img-fluid rounded" alt="" style={{maxHeight:'100px',width:'100%',objectFit:'cover'}}/></div>
+                    <div className="col-4 d-flex align-items-center">
+                        <img src={event.image} className="img-fluid rounded event-image" alt="Event" />
+                    </div>
                         <div className="col-8">
                         <p className="mb-1">{event.title}</p>
                         <p className='mb-1'>({event.startDate}) - ({event.endDate})</p>

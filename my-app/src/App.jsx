@@ -6,10 +6,11 @@ import { useState } from 'react';
 import PublicPostings from './Components/PublicPostings.jsx';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import NewPost from './Components/NewPost.jsx';
+import SidePanel from './Components/SidePanel.jsx';
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('isLoggedIn') === 'true');
+  const [isLoggedIn, setIsLoggedIn] = useState(sessionStorage.getItem('isLoggedIn') === 'true');
   const [showSignIn, setShowSignIn] = useState(false);
-  const [username, setUsername] = useState(localStorage.getItem('username') ?? null); // New state for username
+  const [username, setUsername] = useState(sessionStorage.getItem('username') ?? null); // New state for username
   useEffect(() => {
     console.log("App component - isLoggedIn:", isLoggedIn);
     console.log("App component - username:", username);

@@ -196,3 +196,6 @@ body, html {
   word-wrap: break-word;
 
 }
+.no-underline a{
+  text-decoration: none;
+}

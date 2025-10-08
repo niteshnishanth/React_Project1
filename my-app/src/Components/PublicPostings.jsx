@@ -3,6 +3,7 @@ import { useNavigate,Router, Routes,Route } from 'react-router-dom'
 import axios from 'axios';
 import Posting from './Posting';
 import io from 'socket.io-client';
+import SidePanel from './SidePanel';
 const socket = io('http://localhost:5000');
 function PublicPostings() {
     const [events,setEvents]=useState([])
@@ -42,7 +43,7 @@ function PublicPostings() {
     <>
     <div className="container-fluid">
         <div className="row">
-            <div className="col-6">
+            <div className="col-8">
                 <div className="customcontainer">
                     <div className='row'>
                         <div className='col-6'>
@@ -90,13 +91,12 @@ function PublicPostings() {
                                     }
                                 </div>
                             </div>
-                            
-                        
                         </div>
-
                     </div>
                 </div>
             </div>
+               <SidePanel/>
+            
         </div>
     </div>
     </>

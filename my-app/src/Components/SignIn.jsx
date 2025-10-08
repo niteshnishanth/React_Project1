@@ -30,8 +30,9 @@ function SignIn({ setIsLoggedIn, setShowSignIn, setUsername }) {
       setIsLoggedIn(true);
       setShowSignIn(false);
       setUsername(response.data.username); // Set the username in App state'
-      localStorage.setItem('isLoggedIn', 'true');
-      localStorage.setItem('username', response.data.username);
+      // Persist session to sessionStorage (cleared when the tab/window is closed)
+      sessionStorage.setItem('isLoggedIn', 'true');
+      sessionStorage.setItem('username', response.data.username);
       console.log("Logged in user:", response.data.username);
       //console.log(response.data.username.username);
       //console.log(response.data.user.username);
