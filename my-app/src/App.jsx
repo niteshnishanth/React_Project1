@@ -6,18 +6,20 @@ import { useState } from 'react';
 import PublicPostings from './Components/PublicPostings.jsx';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import NewPost from './Components/NewPost.jsx';
-import SidePanel from './Components/SidePanel.jsx';
+
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(sessionStorage.getItem('isLoggedIn') === 'true');
   const [showSignIn, setShowSignIn] = useState(false);
-  const [username, setUsername] = useState(sessionStorage.getItem('username') ?? null); // New state for username
+  const [sidePanel, setSidePanel] = useState('Home')
+  const [username, setUsername] = useState(sessionStorage.getItem('username') ?? null);
+  const [events,setEvents]=useState([])
   useEffect(() => {
     console.log("App component - isLoggedIn:", isLoggedIn);
     console.log("App component - username:", username);
   }, [isLoggedIn, username]); 
   return (
     <>
-      <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setShowSignIn={setShowSignIn} username={username} setUsername={setUsername} />
+      <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setShowSignIn={setShowSignIn} username={username} setUsername={setUsername} setSidePanel={setSidePanel} />
 
       <main className="container mt-4">
         {!isLoggedIn && showSignIn && (
@@ -28,7 +30,7 @@ function App() {
       {/* Hide page routes while sign-in UI is displayed so the sign-in panel appears alone */}
       {!showSignIn && (
         <Routes>
-          <Route path="/" element={<PublicPostings />} />
+          <Route path="/" element={<PublicPostings sidePanel={sidePanel} setSidePanel={setSidePanel} events={events} setEvents={setEvents}/>} />
           <Route path="/newpost" element={isLoggedIn ? <NewPost /> : <Navigate to="/" replace />} />
         </Routes>
       )}

@@ -1,13 +1,14 @@
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-import $ from 'jquery';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 function NewPost() {
   const [Title, setTitle] = useState('');
   const [location, setLocation] = useState('');
-  const [Category, setCategory] = useState([]);
+    // post classification: top-level type (Classifieds/Listings/Deals/Events) and a subcategory
+    const [type, setType] = useState('Classifieds');
+    const [subcategory, setSubcategory] = useState('');
   const [Description, setDescription] = useState('');
   const [image, setImage] = useState(null);
   const today = new Date().toISOString().split('T')[0];
@@ -17,7 +18,6 @@ function NewPost() {
   const handleSubmit = async (e) => {
     console.log('Title:', Title);
     console.log('Location:', location);
-    console.log('Category:', Category);
     console.log('Description:', Description);
     e.preventDefault();
     try{
@@ -26,7 +26,8 @@ function NewPost() {
         startDate: startDate,
         endDate: endDate,
         location: location,
-        category: Category,
+        type: type,
+        subcategory: subcategory,
         description: Description,
         image: image,
         }
@@ -59,12 +60,22 @@ function NewPost() {
     setImage(null);
   }
 }
-const handleCheckBoxChange = (event) => {
-  const { value, checked } = event.target;
-  setCategory((prev) =>
-    checked ? [...prev, value] : prev.filter((v) => v !== value)
-  );
-};
+
+// helper to supply subcategories for each top-level type
+const getSubcategoriesForType = (type) => {
+    switch(type){
+        case 'Classifieds':
+            return ['Babysitting','Computers','Electronics','Accounting','Software','Passenger Cars'];
+        case 'Listings':
+            return ['Accounting & Tax','Architects','Cell Repairs','Apartments','Appliances & Videos'];
+        case 'Deals':
+            return ['Dining & Grocery','Fashion','Computer Training','Spa & Salon'];
+        case 'Events':
+            return ['Community','Concerts','Meetups'];
+        default:
+            return [];
+    }
+}
 
   return (
     <>
@@ -101,21 +112,24 @@ const handleCheckBoxChange = (event) => {
                                 <input type="text" className="form-control" onChange={(e)=>setLocation(e.target.value)} required/>
                             </div>
                             <div className='mb-3'>
-                                <label className="form-label">Category</label><br />
-                                    <div style={{fontWeight:'normal', lineHeight:'2',paddingLeft:'10px'}}>
-                                    <div className='row'>
-                                        <div className='col-4'>
-                                            <label><input type="checkbox" name="Classified" id="Classified" value="Classified" onChange={handleCheckBoxChange} />Classified</label>
-                                        </div>
-                                        <div className='col-4'>
-                                            <label><input type="checkbox" name="Event" id="Event" value="Event" onChange={handleCheckBoxChange} />Event</label>
-                                        </div>
-                                        <div className='col-4'>
-                                            <label><input type="checkbox" name="Postings" id="Postings" value="Postings" onChange={handleCheckBoxChange}/>Postings</label>
-                                        </div>
-                                        </div>
-                                    </div>
-                             </div>
+                                <label className="form-label">Post Type</label>
+                                <select className="form-select" value={type} onChange={(e)=>{setType(e.target.value)}}>
+                                    <option value="Classifieds">Classifieds</option>
+                                    <option value="Listings">Listings</option>
+                                    <option value="Deals">Deals</option>
+                                    <option value="Events">Events</option>
+                                </select>
+                            </div>
+
+                            <div className='mb-3'>
+                                <label className="form-label">Subcategory</label>
+                                <select className="form-select" value={subcategory} onChange={(e)=>setSubcategory(e.target.value)} required>
+                                    <option value="">-- Select subcategory --</option>
+                                    {getSubcategoriesForType(type).map((sc, idx)=>(
+                                        <option key={idx} value={sc}>{sc}</option>
+                                    ))}
+                                </select>
+                            </div>
                             <div className="mb-3">
                                 <label className="form-label">Description</label>
                                 <textarea className="form-control" rows="3" onChange={(e)=>{setDescription(e.target.value)}}></textarea>

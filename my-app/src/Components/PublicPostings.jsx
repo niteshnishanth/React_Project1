@@ -4,16 +4,26 @@ import axios from 'axios';
 import Posting from './Posting';
 import io from 'socket.io-client';
 import SidePanel from './SidePanel';
+import SidePanelListings from './SidePanelListings';
+import SidePanelClassifieds from './SidePanelClassifieds';
+import SidePanelDeals from './SidePanelDeals';
 const socket = io('http://localhost:5000');
-function PublicPostings() {
-    const [events,setEvents]=useState([])
+function PublicPostings({sidePanel,events,setEvents}) {
+            const [category,setCategory]=useState([])
+            const [filterData,setFilterData]=useState([])
+            const [counter,setCounter]=useState({})
             const eventData= async ()=>{
             try
             {
                 const response=await axios.post('http://localhost:5000/api/AllEvents')
                 if(response.data.success)
-                {setEvents(response.data.AllEvents)
-                    console.log(response.data.AllEvents)
+                {
+                    // log the raw counts payload so we can confirm keys/shape before setting state
+                    console.log('counts payload from server:', response.data.counts)
+                    // server currently returns counts as an array (find()), use first element or empty object
+                    setCounter(response.data.counts?.[0] || {})
+                    setEvents(response.data.AllEvents)
+                    console.log('AllEvents length:', response.data.AllEvents?.length)
                 }
                 else{
                 console.log('nothing to update')
@@ -24,6 +34,15 @@ function PublicPostings() {
                 console.log(error)
             }
         }
+    useEffect(()=>{
+        if(category.length>0){
+            const tempData=events.filter(event=>event.type===category[0]&&event.subcategory===category[1])
+            setFilterData(tempData)
+        }
+        else{
+            setFilterData(events)
+        }
+    },[category,events])
     useEffect(()=>{
         eventData()
         socket.on('Post Updated',(updatedPost)=>{
@@ -75,8 +94,8 @@ function PublicPostings() {
                                 <br />
                                 <div className="row">
                                 {
-                                events && events.map((event,index)=>(
-                                    event.status=='pending'&&<Posting key={index} event={event}/>
+                                filterData && filterData.map((filter,index)=>(
+                                    filter.status=='pending'&&<Posting key={index} filter={filter}/>
                                 ))
                                 }
                                 </div>
@@ -85,8 +104,8 @@ function PublicPostings() {
                                 <br />
                                 <div className="row">
                                     {
-                                    events&&events.map((event,index)=>(
-                                        event.status=='completed'&&<Posting key={index} event={event}/>
+                                    filterData&&filterData.map((filter,index)=>(
+                                        filter.status=='completed'&&<Posting key={index} filter={filter}/>
                                     ))
                                     }
                                 </div>
@@ -95,10 +114,12 @@ function PublicPostings() {
                     </div>
                 </div>
             </div>
-               <SidePanel/>
-            
+               {sidePanel==='Home'&&Object.keys(counter).length>0&&(<SidePanel category={category} setCategory={setCategory} events={events} setEvents={setEvents} counts={counter}/>)}
+               {sidePanel==='Listings'&&Object.keys(counter).length>0&&(<SidePanelListings  category={category} setCategory={setCategory} events={events} setEvents={setEvents} counts={counter}/>)}
+               {sidePanel==='Classifieds'&&Object.keys(counter).length>0&&(<SidePanelClassifieds  category={category} setCategory={setCategory} events={events} setEvents={setEvents} counts={counter}/>)}
+               {sidePanel==='Deals'&&Object.keys(counter).length>0&&(<SidePanelDeals category={category} setCategory={setCategory} events={events} setEvents={setEvents} counts={counter}/>)}
         </div>
-    </div>
+        </div>
     </>
   )
 }

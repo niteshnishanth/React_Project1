@@ -2,10 +2,12 @@ import React from 'react'
 import { useNavigate, Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-
-function Navbar({isLoggedIn,setIsLoggedIn,showSignIn,setShowSignIn, username,setUsername}) {
+import SidePanel from './SidePanel';
+function Navbar({isLoggedIn,setIsLoggedIn,showSignIn,setShowSignIn, username,setUsername,setSidePanel}) {
   const navigate = useNavigate();
-    
+const sidePanel=(category)=>{
+  setSidePanel(category)
+}
   return (
     <>
     <nav className="navbar navbar-expand-lg navbar-light bg-light custom-navbar">
@@ -14,16 +16,23 @@ function Navbar({isLoggedIn,setIsLoggedIn,showSignIn,setShowSignIn, username,set
     <div className="collapse navbar-collapse" id="navbarSupportedContent">
       <ul className="navbar-nav me-auto mb-2 mb-lg-0">
         <li className="nav-item">
-          <Link className="nav-link" aria-current="page" to="/" onClick={() => { setShowSignIn?.(false); navigate('/'); }}>Home</Link>
-        </li>
-        <li className="nav-item">
-          <a className="nav-link" href="#">About</a>
-        </li>
-        <li className="nav-item">
-          <a className="nav-link" href="#">Contact</a>
+          <Link className="nav-link" aria-current="page" to="/" onClick={() => { setShowSignIn?.(false); navigate('/'); sidePanel('Home')}}>Home</Link>
         </li>
         <li className="nav-item dropdown">
-          <a className="nav-link dropdown-toggle" href="#" id="eventsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a className="nav-link dropdown-toggle" href="#" id="listingsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" onClick={()=>{sidePanel('Listings')}}>
+           Listings
+          </a>
+          <ul className="dropdown-menu dropdown-menu" aria-labelledby="listingsDropdown">
+            <li><a className="dropdown-item" href="#">Services</a></li>
+            <li><a className="dropdown-item" href="#">Real Estate</a></li>
+            <li><a className="dropdown-item" href="#">Business</a></li>
+            <li><a className="dropdown-item" href="#">Health</a></li>
+            <li><a className="dropdown-item" href="#">Travel</a></li>
+             <li><a className="dropdown-item" href="#">General</a></li>
+          </ul>
+        </li>
+        <li className="nav-item dropdown">
+          <a className="nav-link dropdown-toggle" href="#" id="eventsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" onClick={()=>{sidePanel('Events')}}>
             Events
           </a>
           <ul className="dropdown-menu dropdown-menu" aria-labelledby="eventsDropdown">
@@ -35,10 +44,10 @@ function Navbar({isLoggedIn,setIsLoggedIn,showSignIn,setShowSignIn, username,set
           </ul>
         </li>
         <li className="nav-item dropdown">
-          <a className="nav-link dropdown-toggle" href="#" id="eventsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a className="nav-link dropdown-toggle" href="#" id="classifiedsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" onClick={()=>{sidePanel('Classifieds')}}>
             Classifieds
           </a>
-          <ul className="dropdown-menu dropdown-menu" aria-labelledby="eventsDropdown">
+          <ul className="dropdown-menu dropdown-menu" aria-labelledby="classifiedsDropdown">
             <li><a className="dropdown-item" href="#">General</a></li>
             <li><a className="dropdown-item" href="#">Auto</a></li>
             <li><a className="dropdown-item" href="#">Real Estate</a></li>
@@ -46,10 +55,10 @@ function Navbar({isLoggedIn,setIsLoggedIn,showSignIn,setShowSignIn, username,set
           </ul>
         </li>
         <li className="nav-item dropdown">
-          <a className="nav-link dropdown-toggle" href="#" id="eventsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a className="nav-link dropdown-toggle" href="#" id="dealsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" onClick={()=>{sidePanel('Deals')}}>
             Deals
           </a>
-          <ul className="dropdown-menu dropdown-menu" aria-labelledby="eventsDropdown">
+          <ul className="dropdown-menu dropdown-menu" aria-labelledby="dealsDropdown">
             <li><a className="dropdown-item" href="#">Dining</a></li>
             <li><a className="dropdown-item" href="#">Grocery</a></li>
             <li><a className="dropdown-item" href="#">Spa</a></li>
@@ -59,7 +68,7 @@ function Navbar({isLoggedIn,setIsLoggedIn,showSignIn,setShowSignIn, username,set
           </ul>
         </li>
         <li className="nav-item dropdown">
-          <a className="nav-link dropdown-toggle" href="#" id="eventsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a className="nav-link dropdown-toggle" href="#" id="eventsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" >
             Gallery
           </a>
           <ul className="dropdown-menu dropdown-menu" aria-labelledby="eventsDropdown">
