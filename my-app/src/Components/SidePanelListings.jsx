@@ -1,7 +1,7 @@
 import React from 'react'
 
 function SidePanelListings({category,setCategory,events,setEvents,counts}) {
-    console.log('SidePanelListings',counts['Computers'])
+    
   return (
 <div className='col-4'>          
             <div class="accordion" id="accordionExample">
@@ -14,9 +14,9 @@ function SidePanelListings({category,setCategory,events,setEvents,counts}) {
                 <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                     <div class="accordion-body">
                         <ul className='no-underline'>
-                            <li><a href='#' onClick={(e)=>{e.preventDefault();setCategory(['Services','Accounting & Tax'])}}>Accounting & Tax{counts['Accounting & Tax']}</a></li>
-                            <li><a href='#' onClick={(e)=>{e.preventDefault();setCategory(['Services','Architects'])}}>Architects{counts['Architects']}</a></li>
-                            <li><a href='#' onClick={(e)=>{e.preventDefault();setCategory(['Services','Cell Repairs'])}}>Cell Repairs{counts['Cell Repairs']}</a></li>
+                            <li><a href='#' onClick={(e)=>{e.preventDefault();setCategory(['Services','Accounting & Tax'])}}>Accounting & Tax{getCount('Accounting & Tax')}</a></li>
+                            <li><a href='#' onClick={(e)=>{e.preventDefault();setCategory(['Services','Architects'])}}>Architects{getCount('Architects')}</a></li>
+                            <li><a href='#' onClick={(e)=>{e.preventDefault();setCategory(['Services','Cell Repairs'])}}>Cell Repairs{getCount('Cell Repairs')}</a></li>
                         </ul>
                     </div>
                 </div>
@@ -30,9 +30,9 @@ function SidePanelListings({category,setCategory,events,setEvents,counts}) {
                 <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                     <div class="accordion-body">
                         <ul className='no-underline'>
-                            <li><a href='#' onClick={(e)=>{e.preventDefault();setCategory(['Real Estate','Apartments'])}}>Apartments{counts['Apartments']}</a></li>
-                            <li><a href='#'onClick={(e)=>{e.preventDefault();setCategory(['Real Estate','Furniture'])}}>Furniture{counts['Furniture']}</a></li>
-                            <li><a href='#' onClick={(e)=>{e.preventDefault();setCategory(['Real Estate','Home Energy'])}}>Home Energy{counts['HomeEnergy']}</a></li>
+                            <li><a href='#' onClick={(e)=>{e.preventDefault();setCategory(['Real Estate','Apartments'])}}>Apartments{getCount('Apartments')}</a></li>
+                            <li><a href='#'onClick={(e)=>{e.preventDefault();setCategory(['Real Estate','Furniture'])}}>Furniture{getCount('Furniture')}</a></li>
+                            <li><a href='#' onClick={(e)=>{e.preventDefault();setCategory(['Real Estate','Home Energy'])}}>Home Energy{getCount('HomeEnergy')}</a></li>
                         </ul>
                     </div>
                 </div>
@@ -46,9 +46,9 @@ function SidePanelListings({category,setCategory,events,setEvents,counts}) {
                 <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
                     <ul className='no-underline'>
-                            <li><a href='#' onClick={(e)=>{e.preventDefault();setCategory(['Business','Appliances&Videos'])}}>Appliances&Videos{counts['Appliances&Videos']}</a></li>
-                            <li><a href='#' onClick={(e)=>{e.preventDefault();setCategory(['Business','Banks'])}}>Banks{counts['Banks']}</a></li>
-                            <li><a href='#' onClick={(e)=>{e.preventDefault();setCategory(['Business','Car Dealers'])}}>Car Dealers{counts['CarDealers']}</a></li>
+                            <li><a href='#' onClick={(e)=>{e.preventDefault();setCategory(['Business','Appliances&Videos'])}}>Appliances&Videos{getCount('Appliances&Videos')}</a></li>
+                            <li><a href='#' onClick={(e)=>{e.preventDefault();setCategory(['Business','Banks'])}}>Banks{getCount('Banks')}</a></li>
+                            <li><a href='#' onClick={(e)=>{e.preventDefault();setCategory(['Business','Car Dealers'])}}>Car Dealers{getCount('CarDealers')}</a></li>
                     </ul>
                 </div>
             </div>
@@ -62,9 +62,9 @@ function SidePanelListings({category,setCategory,events,setEvents,counts}) {
                 <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
                     <ul className='no-underline'>
-                            <li><a href='#' onClick={()=>setCategory(['Health','Anesthesiology'])}>Anesthesiology{counts['Anesthesiology']}</a></li>
-                            <li><a href='#'onClick={()=>setCategory(['Health','Cardiology'])}>Cardiology{counts['Cardiology']}</a></li>
-                            <li><a href='#' onClick={()=>setCategory(['Health','Dentists'])}>Dentists{counts['Dentists']}</a></li>
+                            <li><a href='#' onClick={()=>setCategory(['Health','Anesthesiology'])}>Anesthesiology{getCount('Anesthesiology')}</a></li>
+                            <li><a href='#'onClick={()=>setCategory(['Health','Cardiology'])}>Cardiology{getCount('Cardiology')}</a></li>
+                            <li><a href='#' onClick={()=>setCategory(['Health','Dentists'])}>Dentists{getCount('Dentists')}</a></li>
                     </ul>
                 </div>
             </div>
@@ -78,10 +78,10 @@ function SidePanelListings({category,setCategory,events,setEvents,counts}) {
                 <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
                     <ul className='no-underline'>
-                            <li><a href='#' onClick={(e)=>{e.preventDefault();setCategory(['Travel','Airport Taxi Pickup & Dropoff'])}}>Airport Taxi Pickup & Dropoff{counts['AirportTaxiPickupDropoff']}</a></li>
-                            <li><a href='#' onClick={(e)=>{e.preventDefault();setCategory(['Travel','Car Rentals'])}}>Car Rentals{counts['CarRentals']}</a></li>
-                            <li><a href='#' onClick={(e)=>{e.preventDefault();setCategory(['Travel','Hotel & Motel'])}}>Hotel & Motel{counts['Hotel&Motel']}</a></li>
-                            <li><a href='#'>Travel Agents{counts['TravelAgents']}</a></li>
+                            <li><a href='#' onClick={(e)=>{e.preventDefault();setCategory(['Travel','Airport Taxi Pickup & Dropoff'])}}>Airport Taxi Pickup & Dropoff{getCount('AirportTaxiPickupDropoff')}</a></li>
+                            <li><a href='#' onClick={(e)=>{e.preventDefault();setCategory(['Travel','Car Rentals'])}}>Car Rentals{getCount('CarRentals')}</a></li>
+                            <li><a href='#' onClick={(e)=>{e.preventDefault();setCategory(['Travel','Hotel & Motel'])}}>Hotel & Motel{getCount('Hotel&Motel')}</a></li>
+                            <li><a href='#'>Travel Agents{getCount('TravelAgents')}</a></li>
                     </ul>
                 </div>
             </div>
@@ -95,9 +95,9 @@ function SidePanelListings({category,setCategory,events,setEvents,counts}) {
                 <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
                     <ul className='no-underline'>
-                            <li><a href='#' onClick={(e)=>{e.preventDefault();setCategory(['General','Advertising'])}}>Advertising{counts['Advertising']}</a></li>
-                            <li><a href='#' onClick={(e)=>{e.preventDefault();setCategory(['General','Art & Painting'])}}>Art & Painting{counts['Art&Painting']}</a></li>
-                            <li><a href='#' onClick={(e)=>{e.preventDefault();setCategory(['General','Associations'])}}>Associations{counts['Associations']}</a></li>
+                            <li><a href='#' onClick={(e)=>{e.preventDefault();setCategory(['General','Advertising'])}}>Advertising{getCount('Advertising')}</a></li>
+                            <li><a href='#' onClick={(e)=>{e.preventDefault();setCategory(['General','Art & Painting'])}}>Art & Painting{getCount('Art&Painting')}</a></li>
+                            <li><a href='#' onClick={(e)=>{e.preventDefault();setCategory(['General','Associations'])}}>Associations{getCount('Associations')}</a></li>
                     </ul>
                 </div>
             </div>

@@ -84,10 +84,8 @@ const User = mongoose.models.User || mongoose.model("User", userSchema);
 app.post('/api/login', async (req, res) => {
   const { email, password } = req.body;
   console.log("Login attempt:", email, password);
-
   try {
-    const user = await User.findOne({ email, password });
-
+    var user = await User.findOne({ email, password});
     if (user) {
       return res.json({ success: true, message: "Login successful!" ,username:user.firstName});
     } else {
@@ -283,3 +281,29 @@ async function initializeCounter() {
   }
 }
 initializeCounter();
+app.post('/api/gloginSignUp',async (req,res)=>{
+  const {email,username}=req.body
+  try{
+
+      var user = await User.findOne({email});
+      if(user){
+        return res.json({success:true})
+      }
+      else
+      {
+        const newUser= new User({
+          firstName:username,
+          email:email
+        })
+        await newUser.save()
+        .then(() => { console.log('User saved') })
+        .catch((e) => { console.log(e) })
+        return res.json({ success: true })
+      }
+    }
+    
+    catch(e)
+    {
+      console.log(e)
+    }
+})

@@ -1,7 +1,10 @@
 import React from 'react'
 
 function SidePanelClassifieds({category,setCategory,events,setEvents,counts}) {
-    console.log('SidePanelClassifieds',counts['Computers'])
+        const getCount = (label) => {
+       return counts && counts[label] !== undefined ? counts[label] : 0;
+    }
+    console.log('SidePanelClassifieds',getCount['Computers'])
   return (
     <div className='col-4'>
             <strong>BROWSE BY CATEGORY</strong>
@@ -16,9 +19,9 @@ function SidePanelClassifieds({category,setCategory,events,setEvents,counts}) {
                 <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
                     <ul className='no-underline'>
-                        <li><a href='' onClick={(e)=>{e.preventDefault();setCategory(['General','BabySitting'])}}>BabySitting{counts['BabySitting']}</a></li>
-                        <li><a href='' onClick={(e)=>{e.preventDefault();setCategory(['General','Computers'])}}>Computers{counts['Computers']}</a></li>
-                        <li><a href='' onClick={(e)=>{e.preventDefault();setCategory(['General','Electronics'])}}>Electronics{counts['Electronics']}</a></li>
+                        <li><a href='' onClick={(e)=>{e.preventDefault();setCategory(['General','BabySitting'])}}>BabySitting{getCount('BabySitting')}</a></li>
+                        <li><a href='' onClick={(e)=>{e.preventDefault();setCategory(['General','Computers'])}}>Computers{getCount('Computers')}</a></li>
+                        <li><a href='' onClick={(e)=>{e.preventDefault();setCategory(['General','Electronics'])}}>Electronics{getCount('Electronics')}</a></li>
                     </ul>
                 </div>
                 </div>
@@ -32,10 +35,10 @@ function SidePanelClassifieds({category,setCategory,events,setEvents,counts}) {
                 <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
                     <ul className='no-underline'>
-                    <li><a href='' onClick={(e)=>{e.preventDefault();setCategory(['Jobs','Accounting'])}}>Accounting{counts['Accounting']}</a></li>
-                    <li><a href='' onClick={(e)=>{e.preventDefault();setCategory(['Jobs','Software'])}}>Software{counts['Software']}</a></li>
-                    <li><a href=''onClick={(e)=>{e.preventDefault();setCategory(['Jobs','Hr&Recruting'])}}>Hr&Recruting{counts['Hr&Recruting']}</a></li>
-                    <li><a href='' onClick={(e)=>{e.preventDefault();setCategory(['Jobs','Sales'])}}>Sales{counts['Sales']}</a></li>
+                    <li><a href='' onClick={(e)=>{e.preventDefault();setCategory(['Jobs','Accounting'])}}>Accounting{getCount('Accounting')}</a></li>
+                    <li><a href='' onClick={(e)=>{e.preventDefault();setCategory(['Jobs','Software'])}}>Software{getCount('Software')}</a></li>
+                    <li><a href=''onClick={(e)=>{e.preventDefault();setCategory(['Jobs','Hr&Recruting'])}}>Hr&Recruting{getCount('Hr&Recruting')}</a></li>
+                    <li><a href='' onClick={(e)=>{e.preventDefault();setCategory(['Jobs','Sales'])}}>Sales{getCount('Sales')}</a></li>
                     </ul>
                 </div>
                 </div>
@@ -49,11 +52,11 @@ function SidePanelClassifieds({category,setCategory,events,setEvents,counts}) {
                 <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
                     <ul className='no-underline'>
-                        <li><a href='' onClick={(e)=>{e.preventDefault();setCategory(['Autos','Passenger Cars'])}}>Passenger Cars{counts['PassengerCars']}</a></li>
-                        <li><a href='' onClick={(e)=>{e.preventDefault();setCategory(['Autos','Trucks'])}}>Trucks{counts['Trucks']}</a></li>
-                        <li><a href='' onClick={(e)=>{e.preventDefault();setCategory(['Autos','SUV'])}}>SUV{counts['SUV']}</a></li>
-                        <li><a href='' onClick={(e)=>{e.preventDefault();setCategory(['Autos','Motorcycles'])}}>Motorcycles{counts['Motorcycles']}</a></li>
-                        <li><a href='' onClick={(e)=>{e.preventDefault();setCategory(['Autos','Commercial Vehicles'])}}>Trucks{counts['CommercialVehicles']}</a></li>
+                        <li><a href='' onClick={(e)=>{e.preventDefault();setCategory(['Autos','Passenger Cars'])}}>Passenger Cars{getCount('PassengerCars')}</a></li>
+                        <li><a href='' onClick={(e)=>{e.preventDefault();setCategory(['Autos','Trucks'])}}>Trucks{getCount('Trucks')}</a></li>
+                        <li><a href='' onClick={(e)=>{e.preventDefault();setCategory(['Autos','SUV'])}}>SUV{getCount('SUV')}</a></li>
+                        <li><a href='' onClick={(e)=>{e.preventDefault();setCategory(['Autos','Motorcycles'])}}>Motorcycles{getCount('Motorcycles')}</a></li>
+                        <li><a href='' onClick={(e)=>{e.preventDefault();setCategory(['Autos','Commercial Vehicles'])}}>Trucks{getCount('CommercialVehicles')}</a></li>
                     </ul>
                                
                 </div>
@@ -68,11 +71,11 @@ function SidePanelClassifieds({category,setCategory,events,setEvents,counts}) {
                 <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
                     <ul className='no-underline'>
-                        <li><a href='' onClick={(e)=>{e.preventDefault();setCategory(['Real Estate','Apartments'])}}>Apartments{counts['Apartments']}</a></li>
-                        <li><a href='' onClick={(e)=>{e.preventDefault();setCategory(['Real Estate','Condominiums'])}}>Condominiums{counts['Condominiums']}</a></li>
-                        <li><a href='' onClick={(e)=>{e.preventDefault();setCategory(['Real Estate','Townhouses'])}}>Townhouses{counts['Townhouses']}</a></li>
-                        <li><a href='' onClick={(e)=>{e.preventDefault();setCategory(['Real Estate','Single Family Homes'])}}>Single Family Homes{counts['SingleFamilyHomes']}</a></li>
-                        <li><a href='' onClick={(e)=>{e.preventDefault();setCategory(['Real Estate','Commercial Homes'])}}>Condominiums{counts['CommercialHomes']}</a></li>
+                        <li><a href='' onClick={(e)=>{e.preventDefault();setCategory(['Real Estate','Apartments'])}}>Apartments{getCount('Apartments')}</a></li>
+                        <li><a href='' onClick={(e)=>{e.preventDefault();setCategory(['Real Estate','Condominiums'])}}>Condominiums{getCount('Condominiums')}</a></li>
+                        <li><a href='' onClick={(e)=>{e.preventDefault();setCategory(['Real Estate','Townhouses'])}}>Townhouses{getCount('Townhouses')}</a></li>
+                        <li><a href='' onClick={(e)=>{e.preventDefault();setCategory(['Real Estate','Single Family Homes'])}}>Single Family Homes{getCount('SingleFamilyHomes')}</a></li>
+                        <li><a href='' onClick={(e)=>{e.preventDefault();setCategory(['Real Estate','Commercial Homes'])}}>Condominiums{getCount('CommercialHomes')}</a></li>
                     </ul>
                 </div>
                 </div>
@@ -86,8 +89,8 @@ function SidePanelClassifieds({category,setCategory,events,setEvents,counts}) {
                 <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
                     <ul className='no-underline'>
-                        <li><a href='' onClick={(e)=>{e.preventDefault();setCategory(['Roommates','Lease Transfers'])}}>Lease Transfers{counts['LeaseTransfers']}</a></li>
-                        <li><a href=''onClick={(e)=>{e.preventDefault();setCategory(['Roommates','Wanted Roommate'])}}>Wanted Roommate{counts['WantedRoommate']}</a></li>
+                        <li><a href='' onClick={(e)=>{e.preventDefault();setCategory(['Roommates','Lease Transfers'])}}>Lease Transfers{getCount('LeaseTransfers')}</a></li>
+                        <li><a href=''onClick={(e)=>{e.preventDefault();setCategory(['Roommates','Wanted Roommate'])}}>Wanted Roommate{getCount('WantedRoommate')}</a></li>
                     </ul>
                 </div>
                 </div>

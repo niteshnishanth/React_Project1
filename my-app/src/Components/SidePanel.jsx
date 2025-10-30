@@ -1,18 +1,8 @@
 import React from 'react'
 
 function SidePanel({category,setCategory,events,setEvents,counts }) {
-    // defensive helper to get a count for a label; tolerates undefined `counts` and minor naming differences
     const getCount = (label) => {
-        if (!counts) return 0;
-        // exact match
-        if (counts[label] !== undefined) return counts[label];
-        // try normalized match (lowercase, remove non-alphanum)
-        const normalize = s => s?.toString().toLowerCase().replace(/[^a-z0-9]/g, '') || '';
-        const target = normalize(label);
-        for (const k of Object.keys(counts)) {
-            if (normalize(k) === target) return counts[k];
-        }
-        return 0;
+       return counts && counts[label] !== undefined ? counts[label] : 0;
     }
     console.log('SidePanel counts:', counts)
   return (          
