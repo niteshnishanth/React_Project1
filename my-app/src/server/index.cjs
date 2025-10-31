@@ -307,3 +307,19 @@ app.post('/api/gloginSignUp',async (req,res)=>{
       console.log(e)
     }
 })
+app.post('/api/dropcard', async (req, res) => {
+  const { item } = req.body; // receive only the ID
+  try {
+    const deleted = await Post.findByIdAndDelete(item._id);
+    if (deleted) {
+      console.log('✅ Post deleted:', deleted.title);
+      return res.json({ success: true });
+    } else {
+      console.warn('⚠️ No post found with ID:', item._id);
+      return res.status(404).json({ success: false, message: 'Post not found' });
+    }
+  } catch (error) {
+    console.error('❌ Error deleting post:', error);
+    return res.status(500).json({ success: false, message: 'Server error' });
+  }
+});

@@ -7,8 +7,10 @@ import SidePanel from './SidePanel';
 import SidePanelListings from './SidePanelListings';
 import SidePanelClassifieds from './SidePanelClassifieds';
 import SidePanelDeals from './SidePanelDeals';
+
+import CardsContainer from './CardsContainer';
 const socket = io('http://localhost:5000');
-function PublicPostings({sidePanel,events,setEvents}) {
+function PublicPostings({sidePanel,events,setEvents,setEventsLoaded}) {
             const [category,setCategory]=useState([])
             const [filterData,setFilterData]=useState([])
             const [counter,setCounter]=useState({})
@@ -23,15 +25,19 @@ function PublicPostings({sidePanel,events,setEvents}) {
                     // server currently returns counts as an array (find()), use first element or empty object
                     setCounter(response.data.counts?.[0] || {})
                     setEvents(response.data.AllEvents)
+                    setEventsLoaded(true)
                     console.log('AllEvents length:', response.data.AllEvents?.length)
                 }
                 else{
+                
                 console.log('nothing to update')
+                setEventsLoaded(false)
                 }
             }
             catch(error)
             {
                 console.log(error)
+                setEventsLoaded(false)
             }
         }
     useEffect(()=>{
@@ -120,6 +126,7 @@ function PublicPostings({sidePanel,events,setEvents}) {
                {sidePanel==='Deals'&&Object.keys(counter).length>0&&(<SidePanelDeals category={category} setCategory={setCategory} events={events} setEvents={setEvents} counts={counter}/>)}
         </div>
         </div>
+        
     </>
   )
 }

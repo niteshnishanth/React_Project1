@@ -89,6 +89,7 @@ const sidePanel=(category)=>{
         </a>
         <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
           <li><a className="dropdown-item" href="#">Profile</a></li>
+          <li><a className="dropdown-item" href="#" onClick={()=>{navigate('/CardsContainer',{replace:true})}}>View Posts</a></li>
           <li><a className="dropdown-item" href="#">Settings</a></li>
           <li><a className="dropdown-item" href="#">Post Classified</a></li>
           <li><a className="dropdown-item" href="#">Post Event</a></li>
@@ -96,7 +97,7 @@ const sidePanel=(category)=>{
           <li><hr className="dropdown-divider" /></li>
           <li><button className="dropdown-item" onClick={() => {
             setIsLoggedIn?.(false);
-            setUsername?.(null);
+            setUsername?.(null);  
             sessionStorage.removeItem('isLoggedIn');
             sessionStorage.removeItem('username');
             setShowSignIn?.(true);
