@@ -1,7 +1,9 @@
 import React from 'react'
 
 function SidePanelListings({category,setCategory,events,setEvents,counts}) {
-    
+        const getCount = (label) => {
+       return counts && counts[label] !== undefined ? counts[label] : 0;
+    }
   return (
 <div className='col-4'>          
             <div class="accordion" id="accordionExample">

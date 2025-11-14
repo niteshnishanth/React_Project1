@@ -11,7 +11,28 @@ const io=new Server(server,{
     origin:'*'
   }
 })
-
+const categorize= {
+  Services : ['Accounting&Tax','Architects','CellRepairs'],
+  RealEstate:['Apartments','Furniture','HomeEnergy'],
+  Business:['Appliances&Videos','Banks','CarDealers'],
+  Health:['Anesthesiology','Cardiology','Dentists'],
+  Travel:['AirportTaxi','CarRentals','HotelMotel','TravelAgents'],
+  Advertising:['Advertising','ArtPainting','Associations'],
+  Deals:['DiningGrocery','Fashion','ComputerTraining','SpaSalon','BusinessPromotions'],
+  Auto:['PassengerCars','Trucks','SUV','Motorcycles'],
+  Roommates:['LeaseTransfers','WantedRoommates'],
+  GeneralClassifieds:['BabySitting','Computers','Electronics'],
+  GeneralDeals:['All'],
+  GeneralListings:['Advertising','Art&Painting','Associations']
+}
+const findCategory=(subcategory)=>{
+  for(const key in categorize){
+    if(categorize[key].includes(subcategory)){
+      return key
+    }
+  }
+  return null; // return null if no matching category is found
+}
 app.use(cors());
 app.use(express.json());
 const port = 5000;
@@ -177,13 +198,21 @@ app.post('/api/newpost',async (req,res)=>{
 app.post('/api/AllEvents',async (req,res)=>{
   try{
     const AllEvents= await Post.find()
+    const dummyCat=[]
+    const eventswithCategory=AllEvents.map(event=>{
+      const category=findCategory(event.subcategory)
+      dummyCat.push(category)
+      console.log('category found printing ', category)
+        return{event,category}
+    })
+    console.log(eventswithCategory)
     const count=await counter.find()
     console.log(count)
     if(AllEvents.length!=0)
     {
     
       dailyTask()
-    return res.json({success:true,AllEvents:AllEvents,counts:count})
+    return res.json({success:true,AllEvents:eventswithCategory,counts:count})
 
     }
     else

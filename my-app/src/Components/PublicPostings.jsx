@@ -22,6 +22,7 @@ function PublicPostings({sidePanel,events,setEvents,setEventsLoaded}) {
                 {
                     // log the raw counts payload so we can confirm keys/shape before setting state
                     console.log('counts payload from server:', response.data.counts)
+                    console.log('AllEvents payload from server:', response.data.AllEvents)
                     // server currently returns counts as an array (find()), use first element or empty object
                     setCounter(response.data.counts?.[0] || {})
                     setEvents(response.data.AllEvents)
@@ -43,10 +44,13 @@ function PublicPostings({sidePanel,events,setEvents,setEventsLoaded}) {
     useEffect(()=>{
         if(category.length>0){
             const tempData=events.filter(event=>event.type===category[0]&&event.subcategory===category[1])
+            console.log('tempData',tempData)
             setFilterData(tempData)
+
         }
         else{
             setFilterData(events)
+            console.log('all events',events)
         }
     },[category,events])
     useEffect(()=>{
@@ -72,7 +76,7 @@ function PublicPostings({sidePanel,events,setEvents,setEventsLoaded}) {
                 <div className="customcontainer">
                     <div className='row'>
                         <div className='col-6'>
-                            <h5>Public Postings</h5>
+                            <h5>Postings</h5>
                         </div>
                         <div className='col-6 text-end'>
                             <button className='btn btn-primary btn-sm' style={{paddingBottom:'2px'}} onClick={handlePostNew}>post new</button>

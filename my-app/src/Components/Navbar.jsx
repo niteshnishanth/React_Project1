@@ -1,10 +1,8 @@
 import React from 'react'
-import { useNavigate, Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import SidePanel from './SidePanel';
 function Navbar({isLoggedIn,setIsLoggedIn,showSignIn,setShowSignIn, username,setUsername,setSidePanel}) {
-  const navigate = useNavigate();
 const sidePanel=(category)=>{
   setSidePanel(category)
 }
@@ -16,71 +14,71 @@ const sidePanel=(category)=>{
     <div className="collapse navbar-collapse" id="navbarSupportedContent">
       <ul className="navbar-nav me-auto mb-2 mb-lg-0">
         <li className="nav-item">
-          <Link className="nav-link" aria-current="page" to="/" onClick={() => { setShowSignIn?.(false); navigate('/'); sidePanel('Home')}}>Home</Link>
+          <a className="nav-link" aria-current="page" href="#" onClick={(e) => { e.preventDefault(); setShowSignIn?.(false); sidePanel('Home')}}>Home</a>
         </li>
         <li className="nav-item dropdown">
-          <a className="nav-link dropdown-toggle" href="#" id="listingsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" onClick={()=>{sidePanel('Listings')}}>
+          <a className="nav-link dropdown-toggle" href="#" id="listingsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" onClick={(e) => { e.preventDefault(); sidePanel('Listings'); }}>
            Listings
           </a>
           <ul className="dropdown-menu dropdown-menu" aria-labelledby="listingsDropdown">
-            <li><a className="dropdown-item" href="#">Services</a></li>
-            <li><a className="dropdown-item" href="#">Real Estate</a></li>
-            <li><a className="dropdown-item" href="#">Business</a></li>
-            <li><a className="dropdown-item" href="#">Health</a></li>
-            <li><a className="dropdown-item" href="#">Travel</a></li>
-             <li><a className="dropdown-item" href="#">General</a></li>
+            <li><a className="dropdown-item" href="#" onClick={(e) => { e.preventDefault(); sidePanel('Listings'); }}>Services</a></li>
+            <li><a className="dropdown-item" href="#" onClick={(e) => { e.preventDefault(); sidePanel('Listings'); }}>Real Estate</a></li>
+            <li><a className="dropdown-item" href="#" onClick={(e) => { e.preventDefault(); sidePanel('Listings'); }}>Business</a></li>
+            <li><a className="dropdown-item" href="#" onClick={(e) => { e.preventDefault(); sidePanel('Listings'); }}>Health</a></li>
+            <li><a className="dropdown-item" href="#" onClick={(e) => { e.preventDefault(); sidePanel('Listings'); }}>Travel</a></li>
+             <li><a className="dropdown-item" href="#" onClick={(e) => { e.preventDefault(); sidePanel('Listings'); }}>General</a></li>
           </ul>
         </li>
         <li className="nav-item dropdown">
-          <a className="nav-link dropdown-toggle" href="#" id="eventsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" onClick={()=>{sidePanel('Events')}}>
+          <a className="nav-link dropdown-toggle" href="#" id="eventsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" onClick={(e) => { e.preventDefault(); sidePanel('Events'); }}>
             Events
           </a>
           <ul className="dropdown-menu dropdown-menu" aria-labelledby="eventsDropdown">
-            <li><a className="dropdown-item" href="#">Movies</a></li>
-            <li><a className="dropdown-item" href="#">Religious</a></li>
-            <li><a className="dropdown-item" href="#">Sports</a></li>
-            <li><a className="dropdown-item" href="#">Music</a></li>
-            <li><a className="dropdown-item" href="#">Other</a></li>
+            <li><a className="dropdown-item" href="#" onClick={(e) => { e.preventDefault(); sidePanel('Events'); }}>Movies</a></li>
+            <li><a className="dropdown-item" href="#" onClick={(e) => { e.preventDefault(); sidePanel('Events'); }}>Religious</a></li>
+            <li><a className="dropdown-item" href="#" onClick={(e) => { e.preventDefault(); sidePanel('Events'); }}>Sports</a></li>
+            <li><a className="dropdown-item" href="#" onClick={(e) => { e.preventDefault(); sidePanel('Events'); }}>Music</a></li>
+            <li><a className="dropdown-item" href="#" onClick={(e) => { e.preventDefault(); sidePanel('Events'); }}>Other</a></li>
           </ul>
         </li>
         <li className="nav-item dropdown">
-          <a className="nav-link dropdown-toggle" href="#" id="classifiedsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" onClick={()=>{sidePanel('Classifieds')}}>
+          <a className="nav-link dropdown-toggle" href="#" id="classifiedsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" onClick={(e) => { e.preventDefault(); sidePanel('Classifieds'); }}>
             Classifieds
           </a>
           <ul className="dropdown-menu dropdown-menu" aria-labelledby="classifiedsDropdown">
-            <li><a className="dropdown-item" href="#">General</a></li>
-            <li><a className="dropdown-item" href="#">Auto</a></li>
-            <li><a className="dropdown-item" href="#">Real Estate</a></li>
-            <li><a className="dropdown-item" href="#">Roommates</a></li>
+            <li><a className="dropdown-item" href="#" onClick={(e) => { e.preventDefault(); sidePanel('Classifieds'); }}>General</a></li>
+            <li><a className="dropdown-item" href="#" onClick={(e) => { e.preventDefault(); sidePanel('Classifieds'); }}>Auto</a></li>
+            <li><a className="dropdown-item" href="#" onClick={(e) => { e.preventDefault(); sidePanel('Classifieds'); }}>Real Estate</a></li>
+            <li><a className="dropdown-item" href="#" onClick={(e) => { e.preventDefault(); sidePanel('Classifieds'); }}>Roommates</a></li>
           </ul>
         </li>
         <li className="nav-item dropdown">
-          <a className="nav-link dropdown-toggle" href="#" id="dealsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" onClick={()=>{sidePanel('Deals')}}>
+          <a className="nav-link dropdown-toggle" href="#" id="dealsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" onClick={(e) => { e.preventDefault(); sidePanel('Deals'); }}>
             Deals
           </a>
           <ul className="dropdown-menu dropdown-menu" aria-labelledby="dealsDropdown">
-            <li><a className="dropdown-item" href="#">Dining</a></li>
-            <li><a className="dropdown-item" href="#">Grocery</a></li>
-            <li><a className="dropdown-item" href="#">Spa</a></li>
-            <li><a className="dropdown-item" href="#">Computer Training</a></li>
-            <li><a className="dropdown-item" href="#">Business Promotions</a></li>
-            <li><a className="dropdown-item" href="#">General</a></li>
+            <li><a className="dropdown-item" href="#" onClick={(e) => { e.preventDefault(); sidePanel('Deals'); }}>Dining</a></li>
+            <li><a className="dropdown-item" href="#" onClick={(e) => { e.preventDefault(); sidePanel('Deals'); }}>Grocery</a></li>
+            <li><a className="dropdown-item" href="#" onClick={(e) => { e.preventDefault(); sidePanel('Deals'); }}>Spa</a></li>
+            <li><a className="dropdown-item" href="#" onClick={(e) => { e.preventDefault(); sidePanel('Deals'); }}>Computer Training</a></li>
+            <li><a className="dropdown-item" href="#" onClick={(e) => { e.preventDefault(); sidePanel('Deals'); }}>Business Promotions</a></li>
+            <li><a className="dropdown-item" href="#" onClick={(e) => { e.preventDefault(); sidePanel('Deals'); }}>General</a></li>
           </ul>
         </li>
         <li className="nav-item dropdown">
-          <a className="nav-link dropdown-toggle" href="#" id="eventsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" >
+          <a className="nav-link dropdown-toggle" href="#" id="galleryDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" onClick={(e) => { e.preventDefault(); }}>
             Gallery
           </a>
-          <ul className="dropdown-menu dropdown-menu" aria-labelledby="eventsDropdown">
-            <li><a className="dropdown-item" href="#">Pictures</a></li>
-            <li><a className="dropdown-item" href="#">Videos</a></li>
+          <ul className="dropdown-menu dropdown-menu" aria-labelledby="galleryDropdown">
+            <li><a className="dropdown-item" href="#" onClick={(e) => { e.preventDefault(); }}>Pictures</a></li>
+            <li><a className="dropdown-item" href="#" onClick={(e) => { e.preventDefault(); }}>Videos</a></li>
           </ul>
         </li>
-           <li className='nav-item'><a className='nav-link' href="#">Contact Us</a></li>
+           <li className='nav-item'><a className='nav-link' href="#" onClick={(e) => { e.preventDefault(); }}>Contact Us</a></li>
       </ul>
       <form className="d-flex">
     {!isLoggedIn?(
-      <button className="btn btn-outline-success" type="button" onClick={() => { setShowSignIn?.(true); navigate('/', { replace: true }); }}>SignIn</button>
+      <button className="btn btn-outline-success" type="button" onClick={() => { setShowSignIn?.(true); }}>SignIn</button>
     ):(
         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
       <li className="nav-item dropdown">
@@ -88,21 +86,8 @@ const sidePanel=(category)=>{
           {sessionStorage.getItem('username')}
         </a>
         <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-          <li><a className="dropdown-item" href="#">Profile</a></li>
-          <li><a className="dropdown-item" href="#" onClick={()=>{navigate('/CardsContainer',{replace:true})}}>View Posts</a></li>
-          <li><a className="dropdown-item" href="#">Settings</a></li>
-          <li><a className="dropdown-item" href="#">Post Classified</a></li>
-          <li><a className="dropdown-item" href="#">Post Event</a></li>
-          <li><a className="dropdown-item" href="#">Post Listing</a></li>
-          <li><hr className="dropdown-divider" /></li>
-          <li><button className="dropdown-item" onClick={() => {
-            setIsLoggedIn?.(false);
-            setUsername?.(null);  
-            sessionStorage.removeItem('isLoggedIn');
-            sessionStorage.removeItem('username');
-            setShowSignIn?.(true);
-            navigate('/', { replace: true });
-          }}>Logout</button></li>
+          <li><a className="dropdown-item" href="#">Action</a></li>
+          <li><a className="dropdown-item" href="#">Another action</a></li>
 
         </ul>
       </li>

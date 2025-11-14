@@ -1,7 +1,7 @@
 import React from 'react'
 
 function Posting({index,filter}) {
-    console.log(filter.status)
+
   return (                
         <div key={index} className='col-lg-6 col-md-12 col-sm-12 mb-3'>
             <div className="post">

@@ -4,7 +4,7 @@ function SidePanelClassifieds({category,setCategory,events,setEvents,counts}) {
         const getCount = (label) => {
        return counts && counts[label] !== undefined ? counts[label] : 0;
     }
-    console.log('SidePanelClassifieds',getCount['Computers'])
+    
   return (
     <div className='col-4'>
             <strong>BROWSE BY CATEGORY</strong>
