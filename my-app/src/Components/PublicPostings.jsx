@@ -1,4 +1,4 @@
-import {React,useEffect,useState} from 'react'
+import {React,use,useEffect,useState} from 'react'
 import { useNavigate,Router, Routes,Route } from 'react-router-dom'
 import axios from 'axios';
 import Posting from './Posting';
@@ -9,50 +9,41 @@ import SidePanelClassifieds from './SidePanelClassifieds';
 import SidePanelDeals from './SidePanelDeals';
 
 import CardsContainer from './CardsContainer';
+import { set } from 'mongoose';
 const socket = io('http://localhost:5000');
-function PublicPostings({sidePanel,events,setEvents,setEventsLoaded}) {
-            const [category,setCategory]=useState([])
+function PublicPostings({sidePanel,events,setEvents,setEventsLoaded,category,setCategory}) {
+            
             const [filterData,setFilterData]=useState([])
             const [counter,setCounter]=useState({})
             const eventData= async ()=>{
-            try
-            {
+            try {
                 const response=await axios.post('http://localhost:5000/api/AllEvents')
-                if(response.data.success)
-                {
-                    // log the raw counts payload so we can confirm keys/shape before setting state
-                    console.log('counts payload from server:', response.data.counts)
-                    console.log('AllEvents payload from server:', response.data.AllEvents)
-                    // server currently returns counts as an array (find()), use first element or empty object
-                    setCounter(response.data.counts?.[0] || {})
-                    setEvents(response.data.AllEvents)
-                    setEventsLoaded(true)
-                    console.log('AllEvents length:', response.data.AllEvents?.length)
+                if(response.data.success) {
+                  console.log('counts payload from server:', response.data.counts)
+                  console.log('AllEvents payload from server:', response.data.AllEvents)
+                  
+                  // Flatten the structure: extract event and add type/subcategory
+                  const flattenedEvents = response.data.AllEvents.map(item => ({
+                    ...item.event,
+                    type: item.category[0] || item.category,
+                    subcategory: item.category[1]
+                  }))
+                  
+                  setCounter(response.data.counts?.[0] || {})
+                  setEvents(flattenedEvents)
+                  setEventsLoaded(true)
+                  console.log('Flattened events:', flattenedEvents)
                 }
-                else{
-                
-                console.log('nothing to update')
-                setEventsLoaded(false)
+                else {
+                  console.log('nothing to update')
+                  setEventsLoaded(false)
                 }
-            }
-            catch(error)
-            {
+              }
+              catch(error) {
                 console.log(error)
                 setEventsLoaded(false)
-            }
+              }
         }
-    useEffect(()=>{
-        if(category.length>0){
-            const tempData=events.filter(event=>event.type===category[0]&&event.subcategory===category[1])
-            console.log('tempData',tempData)
-            setFilterData(tempData)
-
-        }
-        else{
-            setFilterData(events)
-            console.log('all events',events)
-        }
-    },[category,events])
     useEffect(()=>{
         eventData()
         socket.on('Post Updated',(updatedPost)=>{
@@ -64,7 +55,26 @@ function PublicPostings({sidePanel,events,setEvents,setEventsLoaded}) {
             socket.off('Post Updated')
         }
     },[])
+    useEffect(()=>{
+        if (category && category.length > 0) {
+            console.log('Category selected:', category)  // ['GeneralClassifieds', 'Computers']
+            console.log('All events:', events)
+            
+            // category[1] is the subcategory (e.g., 'Computers')
+            // We just need to match event.subcategory
+            const filtered = events.filter(event => {
+              console.log(`Checking event - type: ${event.type}, subcategory: ${event.subcategory}`)
+              return event.subcategory === category[1]
+            })
+            
+            console.log('Filtered results:', filtered)
+            setFilterData(filtered)
+          } else {
+            setFilterData(events)
+          }
+    },[category,events])
     const navigate = useNavigate();
+
     const handlePostNew = () => {
         navigate('/newpost');
     }

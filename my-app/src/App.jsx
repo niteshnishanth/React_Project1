@@ -13,6 +13,7 @@ function App() {
   const [sidePanel, setSidePanel] = useState('Home')
   const [username, setUsername] = useState(sessionStorage.getItem('username') ?? null);
   const [events,setEvents]=useState([])
+  const [category,setCategory]=useState([])
   const [eventsLoaded,setEventsLoaded]=useState(false)
   useEffect(() => {
     console.log("App component - isLoggedIn:", isLoggedIn);
@@ -20,7 +21,7 @@ function App() {
   }, [isLoggedIn, username]); 
   return (
     <>
-      <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setShowSignIn={setShowSignIn} username={username} setUsername={setUsername} setSidePanel={setSidePanel} />
+      <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setShowSignIn={setShowSignIn} username={username} setUsername={setUsername} setSidePanel={setSidePanel} setCategory={setCategory} />
       
       <main className="container mt-4">
         {!isLoggedIn && showSignIn && (
@@ -31,7 +32,7 @@ function App() {
       {/* Hide page routes while sign-in UI is displayed so the sign-in panel appears alone */}
       {!showSignIn && (
         <Routes>
-          <Route path="/" element={<PublicPostings sidePanel={sidePanel} setSidePanel={setSidePanel} events={events} setEvents={setEvents} username={username} setEventsLoaded={setEventsLoaded} />} />
+          <Route path="/" element={<PublicPostings sidePanel={sidePanel} setSidePanel={setSidePanel} events={events} setEvents={setEvents} username={username} setEventsLoaded={setEventsLoaded} setCategory={setCategory} category={category} />} />
           <Route path="/newpost" element={isLoggedIn ? <NewPost /> : <Navigate to="/" replace />} />
           <Route path="/CardsContainer" element={isLoggedIn && eventsLoaded? <CardsContainer events={events} username={username}/> : <Navigate to="/" replace />} />
         </Routes>
